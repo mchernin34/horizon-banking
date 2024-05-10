@@ -13,7 +13,7 @@ export const signIn = async () => {
   }
 }
 
-export const signUp = async (userData: SignUpParams) => {
+export const signUp = async ({ ...userData }: SignUpParams) => {
   const { email, password, firstName, lastName } = userData
 
   try {
@@ -25,6 +25,7 @@ export const signUp = async (userData: SignUpParams) => {
       password,
       `${firstName} ${lastName}`
     )
+
     const session = await account.createSession(email, password)
 
     cookies().set('appwrite-session', session.secret, {

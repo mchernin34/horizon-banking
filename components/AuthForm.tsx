@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -11,22 +11,10 @@ import { useForm } from 'react-hook-form'
 import { Loader2 } from 'lucide-react'
 
 import { authFormSchema } from '@/lib/utils'
-import { signIn, signUp } from '@/lib/actions/user.actions'
+import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import CustomInput from './CustomInput'
-
-const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(12),
-  firstName: z.string().min(2),
-  lastName: z.string().min(2),
-  address: z.string().min(5),
-  state: z.string().min(2).max(2),
-  postalCode: z.string().min(5).max(5),
-  dob: z.string().min(10).max(10),
-  ssn: z.string().min(4).max(4)
-})
 
 const AuthForm = ({ type }: { type: string }) => {
   const router = useRouter()
