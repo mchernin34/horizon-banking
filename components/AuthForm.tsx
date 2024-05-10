@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form'
 import { Loader2 } from 'lucide-react'
 
 import { authFormSchema } from '@/lib/utils'
+import { signIn, signUp } from '@/lib/actions/user.actions'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import CustomInput from './CustomInput'
@@ -51,16 +52,17 @@ const AuthForm = ({ type }: { type: string }) => {
       // sign up with Appwrite and create a plaid token
 
       if (type === 'sign-up') {
-        // const newUser = await signUp(data)
-        // setUser(newUser)
+        const newUser = await signUp(data)
+        setUser(newUser)
       }
 
       if (type === 'sign-in') {
-        // const response = await signIn({
-        //   email: data.email,
-        //   password: data.password
-        // })
-        // if (response) router.push('/')
+        const response = await signIn({
+          email: data.email,
+          password: data.password
+        })
+
+        if (response) router.push('/')
       }
     } catch (error) {
       console.log(error)
